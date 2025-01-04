@@ -49,3 +49,24 @@ stages:
           - task: CmdLine@2
             inputs:
               script: 'trivy fs --format table -o fs.html .'
+  - stage: SonarqubeCode
+    displayName: 'SonarQubeCodeAnalysis'
+    jobs:
+      - job:
+        steps:
+          - task: SonarQubePrepare@7
+            inputs:
+              SonarQube: 'sonarconn'
+              scannerMode: 'cli'
+              cliScannerVersion: '1.0'
+              configMode: 'manual'
+              cliProjectKey: 'SecretsantaWeb'
+              cliProjectName: 'SecretsantaWeb'
+              cliSources: '.'
+              extraProperties: 'sonar.java.binaries=.'
+          - task: SonarQubeAnalyze@7
+            inputs:
+              jdkversion: 'JAVA_HOME_17_X64'
+          - task: SonarQubePublish@7
+            inputs:
+              pollingTimeoutSec: '300'
