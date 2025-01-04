@@ -1,0 +1,26 @@
+trigger:
+- master
+
+pool:
+  name: selfhostedagent
+  demands:
+    - agent.name -equals agent1
+
+stages:
+  - stage: CodeCompile
+    displayName: 'Code Compile'
+    jobs:
+      - job:
+        steps:
+          - task: Maven@4
+            inputs:
+              azureSubscription: 'serviceconn'
+              mavenPomFile: 'pom.xml'
+              goals: 'compile'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              javaHomeOption: 'JDKVersion'
+              mavenVersionOption: 'Default'
+              mavenAuthenticateFeed: false
+              effectivePomSkip: false
+              sonarQubeRunAnalysis: false
