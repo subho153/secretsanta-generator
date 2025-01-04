@@ -145,4 +145,4 @@ stages:
               action: 'deploy'
               connectionType: 'kubernetesServiceConnection'
               kubernetesServiceConnection: 'k8s-conn'
-              manifests: 'deployment-service.yaml'
+              manifests: 'deploymentservice.yml'
