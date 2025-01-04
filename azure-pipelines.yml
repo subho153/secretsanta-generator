@@ -135,3 +135,14 @@ stages:
               repository: 'dev'
               command: 'push'
               tags: 'latest'
+  - stage: push_to_Aks
+    displayName: 'Deploy in Aks'
+    jobs:
+      - job: push_to_Aks
+        steps:
+          - task: KubernetesManifest@1
+            inputs:
+              action: 'deploy'
+              connectionType: 'kubernetesServiceConnection'
+              kubernetesServiceConnection: 'k8s-conn'
+              manifests: 'deployment-service.yaml'
