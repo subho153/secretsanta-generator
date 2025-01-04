@@ -124,3 +124,14 @@ stages:
           - task: CmdLine@2
             inputs:
               script: 'trivy image --format table -o dockerimages.html secretsantaweb.azurecr.io/dev:latest'
+  - stage: dockerpush
+    displayName: 'Docker Push'
+    jobs:
+      - job: dockerpush
+        steps:
+          - task: Docker@2
+            inputs:
+              containerRegistry: 'dockerconn'
+              repository: 'dev'
+              command: 'push'
+              tags: 'latest'
