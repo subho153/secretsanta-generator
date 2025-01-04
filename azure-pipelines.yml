@@ -24,3 +24,28 @@ stages:
               mavenAuthenticateFeed: false
               effectivePomSkip: false
               sonarQubeRunAnalysis: false
+  - stage: codeTest
+    displayName: 'Code Test'
+    jobs:
+      - job:
+        steps:
+          - task: Maven@4
+            inputs:
+              azureSubscription: 'serviceconn'
+              mavenPomFile: 'pom.xml'
+              goals: 'test'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              javaHomeOption: 'JDKVersion'
+              mavenVersionOption: 'Default'
+              mavenAuthenticateFeed: false
+              effectivePomSkip: false
+              sonarQubeRunAnalysis: false
+  - stage: trivyScan
+    displayName: 'Trivy Scan'
+    jobs:
+      - job:
+        steps:
+          - task: CmdLine@2
+            inputs:
+              script: 'trivy fs --format table -o fs.html .'
