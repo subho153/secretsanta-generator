@@ -106,6 +106,9 @@ stages:
     jobs:
       - job: dockerbuild
         steps:
+          - task: CmdLine@2
+            inputs:
+              script: 'mvn clean package'
           - task: Docker@2
             inputs:
               containerRegistry: 'dockerconn'
