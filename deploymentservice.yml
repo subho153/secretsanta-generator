@@ -23,17 +23,17 @@ spec:
           image: secretsantaweb.azurecr.io/dev:latest
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8080
+            - containerPort: 8089
           readinessProbe:
             httpGet:
               path: /health
-              port: 8080
+              port: 8089
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /health
-              port: 8080
+              port: 8089
             initialDelaySeconds: 10
             periodSeconds: 20
           resources:  # Optional resource constraints
@@ -55,6 +55,6 @@ spec:
     app: santa
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8089
+      targetPort: 8089
   type: LoadBalancer
