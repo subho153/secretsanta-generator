@@ -60,8 +60,8 @@
 	</build>
 <repositories>
 	<repository>
-	  <id>newartifcatSecretWeb</id>
-	  <url>https://pkgs.dev.azure.com/subho3600ghosh0902/SecretsantaWeb/_packaging/newartifcatSecretWeb/maven/v1</url>
+	  <id>newfeedwebapplication</id>
+	  <url>https://pkgs.dev.azure.com/subho3600ghosh0902/webApplication/_packaging/newfeedwebapplication/maven/v1</url>
 	  <releases>
 	    <enabled>true</enabled>
 	  </releases>
@@ -72,8 +72,8 @@
 </repositories>	
 <distributionManagement>
 	<repository>
-	  <id>newartifcatSecretWeb</id>
-	  <url>https://pkgs.dev.azure.com/subho3600ghosh0902/SecretsantaWeb/_packaging/newartifcatSecretWeb/maven/v1</url>
+	  <id>newfeedwebapplication</id>
+	  <url>https://pkgs.dev.azure.com/subho3600ghosh0902/webApplication/_packaging/newfeedwebapplication/maven/v1</url>
 	  <releases>
 	    <enabled>true</enabled>
 	  </releases>
