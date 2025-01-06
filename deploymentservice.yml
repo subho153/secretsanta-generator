@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: santa
-          image: secretsantaweb.azurecr.io/dev:latest
+          image: dockerhubdemosubha1234/newwebappsecretsanta:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8089
