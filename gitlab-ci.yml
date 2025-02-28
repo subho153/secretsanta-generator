@@ -1,0 +1,32 @@
+stages:         
+  - installation_tools
+  - testing
+  - security
+installation_tools_all:       
+  stage: installation_tools
+  script:
+    - sudo apt install openjdk-17-jre-headless -y
+    - sudo apt install docker.io -y && sudo chmod 666 /var/run/docker.sock 
+    - sudo apt install maven -y
+    - sudo snap install kubectl --classic
+    - sudo apt-get install wget apt-transport-https gnupg lsb-release -y
+    - wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+    - echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+    - sudo apt-get update
+    - sudo apt-get install trivy
+  tags:
+    - self-hosted
+compile_and_testing:
+    stage: testing
+    script:
+      - mvn compile
+      - mvn test
+      - mvn package
+    tags:
+    - self-hosted
+security_code_check:
+    stage: security
+    script:
+      - trivy fs --format table -o trivy-scaner-report.html .
+    tags:
+    - self-hosted
